@@ -17,7 +17,6 @@ public class UserVO {
 	private String address2;
 	private String address3;
 
-	private String code_id; //가입타입(C1001:회원, C1002:점주)
 	private int status; //가입상태(0:활성, 1:비활성)
 	private int noShow; //노쇼카운팅
 	private Date regdate; //가입일자

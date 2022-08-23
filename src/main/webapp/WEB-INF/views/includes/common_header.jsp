@@ -37,7 +37,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-               <a href="/common/user"><img src="/resources/img/logo.png" style = "height:230px"></a>
+               <a href="/"><img src="../resources/img/logo.png" style = "height:230px"></a>
             </div>
 
             <div class="clearfix"></div>
@@ -67,21 +67,18 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                 <ul class="nav side-menu" style="">
-                  <li><a><i class="fa fa-cutlery"></i>카테고리 <span class="fa fa-chevron-down"></span></a>
+                  <li>
+                  	<a href="/common/join"><i class="fa fa-heart-o"></i> 회원가입</a>
+                  </li>
+                  <li>
+                  	<a href="/common/login"><i class="fa fa-smile-o"></i> 로그인 </a>
+                  </li>
+                  <li><a><i class="fa fa-clone"></i>카테고리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="fixed_sidebar.html">한식</a></li>
                       <li><a href="fixed_footer.html">일식</a></li>
                       <li><a href="fixed_footer.html">양식</a></li>
                       <li><a href="fixed_footer.html">중식</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-user"></i>마이페이지 <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">예약 내역</a></li>
-                      <li><a href="/mypage/list">내정보 보기</a></li>
-                      <li><a href="/mypage/modify">내정보 수정</a></li>
-                      <li><a href="/mypage/pwmodify">비밀번호 수정</a></li>
-                      <li><a href="/mypage/list">탈퇴</a></li>
                     </ul>
                   </li>
                 </ul>

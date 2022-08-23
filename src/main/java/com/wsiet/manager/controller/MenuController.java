@@ -26,12 +26,23 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/manager/*")
 @Log4j
 @AllArgsConstructor
-public class ManagerController {
+public class MenuController {
 
 	
-	@GetMapping("/main")
-	public void mainGET() {
-		log.info("manager main È­¸é");
+	@GetMapping("/reservlist")
+	public void stlist() {
+	}
+	
+	@GetMapping("/reservregister")
+	public void stregister() {
+	}
+	
+	@GetMapping("/reservmodify")
+	public void stmodify() {
+	}
+	
+	@GetMapping("/reservdelete")
+	public void stdelete() {
 	}
 	
 	

@@ -25,14 +25,12 @@
 	</bean>
 	
 	<!-- HikariCP configuration -->
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
-		destroy-method="close">
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
 	</bean>
 	
 	<!-- MyBatis와 연동하기 위해 추가 -->
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
@@ -46,7 +44,7 @@
       <property name="host" value="smtp.naver.com" />
       <property name="port" value="587" />
       <property name="username" value="tg816@naver.com" />
-      <property name="password" value="tngusdl486!" />
+      <property name="password" value="!23qweasdd" />
       <property name="javaMailProperties">
          <props>
             <prop key="mail.transport.protocol">smtp</prop>
@@ -67,5 +65,6 @@
 	
 	<context:component-scan base-package="com.wsiet.**.service"/>
 	
+	<tx:annotation-driven/>		
 	<task:annotation-driven/>
 </beans>

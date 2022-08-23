@@ -8,6 +8,6 @@
 </head>
 
 <body>
-	
+	점주 페이지
 </body>
 </html>

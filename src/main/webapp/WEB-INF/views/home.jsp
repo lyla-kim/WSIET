@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>오늘 뭐 먹지?</title>
-	<%@ include file="./includes/user_header.jsp" %>
+	<%@ include file="./includes/common_header.jsp" %>
 </head>
 
 <body>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsiet.manager.mapper.StoreMapper">
+
+	<select id="selectAllStore" resultType="com.wsiet.manager.domain.StoreVO">
+		<![CDATA[
+			SELECT * FROM STORE
+		]]>
+	</select>
+	
+	<insert id="insertStore">
+		<selectKey keyProperty="st_num" order="BEFORE" resultType="int">
+			select SEQ_STORE_ST_NUM.nextval from dual
+		</selectKey>
+	
+		INSERT INTO STORE (ST_NUM, CODE_ID, ST_NAME, ST_BIZNUM, ST_ADDRESS1, ST_ADDRESS2, ST_ADDRESS3, ST_PHONE, STARTTIME1, ENDTIME1, ST_CONTENT, REGDATE, UPDDATE)
+		VALUES(#{st_num}, #{code_id}, #{st_name}, #{st_biznum}, #{st_address1}, #{st_address2}, #{st_address3}, #{st_phone}, #{startTime1}, #{endTime1}, #{st_content}, sysdate, sysdate)
+	</insert>
+	
+	<select id="bizNumCheck" parameterType="String" resultType="integer">
+		SELECT count(*) FROM STORE WHERE ST_BIZNUM= #{st_biznum}
+	</select>
+	
+	<select id="selectStoreByNum" resultType="com.wsiet.manager.domain.StoreVO">
+		SELECT * FROM STORE
+		WHERE ST_NUM = #{st_num}
+	</select>
+	
+	<update id="updateStore">
+		UPDATE STORE 
+			SET CODE_ID=#{code_id}, ST_NAME=#{st_name}, ST_ADDRESS1=#{st_address1}, ST_PHONE=#{st_phone}, STARTTIME1=#{startTime1}, ENDTIME1=#{endTime1}, ST_CONTENT=#{st_content}, UPDDATE=SYSDATE , ST_ADDRESS2=#{st_address2}, ST_ADDRESS3=#{st_address3}
+		WHERE ST_NUM= #{st_num};
+	</update>
+	
+	<delete id="deleteStore">
+		DELETE FROM STORE
+		WHERE ST_NUM= #{st_num}; 
+	</delete>
+</mapper>

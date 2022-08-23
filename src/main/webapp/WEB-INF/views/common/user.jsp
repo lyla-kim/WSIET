@@ -4,10 +4,10 @@
 <html>
 <head>
 <title>오늘 뭐 먹지?</title>
-	<%@ include file="../includes/manager_header.jsp" %>
+<%@ include file="../includes/user_header.jsp" %>
 </head>
 
 <body>
-	
+	사용자 메인
 </body>
 </html>

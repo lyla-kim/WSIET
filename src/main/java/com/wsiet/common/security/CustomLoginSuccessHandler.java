@@ -21,27 +21,22 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 			Authentication auth) throws IOException, ServletException {
 		
 		log.warn("Login Success");
-		
-		List<String> roleNames = new ArrayList<String>();
+		List<String> roleNames = new ArrayList<>();
 		
 		auth.getAuthorities().forEach(authority -> {
 			roleNames.add(authority.getAuthority());
 		});
 		
-		log.warn("ROLE NAMES: "+roleNames);
-		
-		if(roleNames.contains("C1001")) {
-			response.sendRedirect("/user/main");
+		if (roleNames.contains("C1001")){
+			response.sendRedirect("/common/user");
 			return;
 		}
-		
-		if(roleNames.contains("C1002")) {
-			response.sendRedirect("/manager/main");
+		if (roleNames.contains("C1002")){
+			response.sendRedirect("/common/manager");
 			return;
 		}
 		
 		response.sendRedirect("/");
-		
 	}
 
 }

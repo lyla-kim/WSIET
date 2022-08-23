@@ -1,4 +1,4 @@
-package com.wsiet.user.controller;
+package com.wsiet.manager.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,16 +23,26 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("/user/*")
+@RequestMapping("/manager/*")
 @Log4j
 @AllArgsConstructor
-public class UserController {
+public class ReservController {
 
 	
-	@RequestMapping("/main_page")
-	public String mainGET() {
-		log.info("user main 화면");
-		return "/user/main";//이건 jsp 경로
+	@GetMapping("/mnlist")
+	public void stlist() {
+	}
+	
+	@GetMapping("/mnregister")
+	public void stregister() {
+	}
+	
+	@GetMapping("/mnmodify")
+	public void stmodify() {
+	}
+	
+	@GetMapping("/mndelete")
+	public void stdelete() {
 	}
 	
 	

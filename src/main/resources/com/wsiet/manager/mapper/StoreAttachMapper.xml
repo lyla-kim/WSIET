@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsiet.manager.mapper.StoreAttachMapper">
+
+	<select id="findByNum" resultType="com.wsiet.manager.domain.StoreAttachVO">
+		SELECT * FROM STORE_IMG WHERE ST_NUM = #{st_num}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO STORE_IMG (ST_NUM, ST_UUID, UPLOADPATH, FILENAME)
+		VALUES(#{st_num}, #{st_uuid}, #{st_uploadpath}, #{st_filename})
+	</insert>
+	
+	<delete id="delete">
+		delete from store_img where st_uuid=#{st_uuid}
+	</delete>
+	
+	<delete id="deleteAll">
+		delete from store_img where st_num=#{st_num}
+	</delete>
+	
+	<select id="getOldFiles" resultType="com.wsiet.manager.domain.StoreAttachVO">
+		SELECT * FROM STORE_IMG WHERE ST_NUM = #{st_num}
+	</select>
+</mapper>

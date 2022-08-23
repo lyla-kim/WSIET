@@ -2,17 +2,8 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wsiet.common.mapper.UsersMapper">
+<mapper namespace="com.wsiet.common.mapper.MyPageMapper">
 
-	<insert id="insertUser">
-		INSERT INTO "USER" (USER_ID, PW, USER_NAME, USER_PHON, EMAIL, ADDRESS1, ADDRESS2, ADDRESS3, STATUS, NOSHOW, REGDATE, UPDDATE) 
-			VALUES(#{user_id}, #{pw}, #{user_name}, #{user_phone}, #{email}, #{address1}, #{address2}, #{address3}, 0, 0, sysdate, sysdate)
-	</insert>
-	
-	<select id="idCheck" parameterType="String" resultType="integer">
-		SELECT count(*) FROM "USER" WHERE user_id= #{user_id}
-	</select>
-	
 	<resultMap type="com.wsiet.common.domain.UserVO" id="userMap">
 		<id property="user_id" column="user_id" />
 		<result property="user_id" column="user_id" />
@@ -36,31 +27,12 @@
 		<result property="code_id" column="code_id"/>
 	</resultMap>
 	
-	<select id="read" resultMap="userMap">
+	<select id="getList" resultMap="userMap">
 		SELECT * 
 		FROM "USER" u 
 		JOIN AUTH a 
 		USING(user_id)
 		WHERE USER_ID = #{user_id}
 	</select>
-	
-	<select id="auth">
-		SELECT * FROM AUTH
-		WHERE user_id = #{user_id}
-	</select>
-	
-	<insert id="insertAuth">
-		INSERT INTO AUTH VALUES(#{user_id},#{code_id})
-	</insert>
-	
-	<update id="updateAuth">
-		UPDATE AUTH SET
-			code_id = #{code_id}
-		WHERE user_id = #{user_id}
-	</update>
-	
-	<delete id="deleteAuth">
-		DELETE AUTH WHERE user_id = #{user_id}
-	</delete>
 	
 </mapper>

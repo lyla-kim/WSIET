@@ -5,30 +5,21 @@
 		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 							http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-<bean id="customAccessDenied" class="com.wsiet.common.security.CustomAccessDeniedHandler"/>
-<bean id="customLoginSuccess" class="com.wsiet.common.security.CustomLoginSuccessHandler"/>
-<bean id="customPasswordEncoder" class="com.wsiet.common.security.CustomNoOpPasswordEncoder"/>
+<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 <bean id="customUserDetailsService" class="com.wsiet.common.security.CustomUserDetailsService"/>
+<bean id="loginSuccess" class="com.wsiet.common.security.CustomLoginSuccessHandler"/>
 
 <security:http>
+
+	<security:form-login login-page="/common/login" authentication-success-handler-ref="loginSuccess"/>
+	<security:logout logout-url="/common/logout" invalidate-session="true" delete-cookies="JSESSION_ID"/>
 
 	<security:csrf disabled="true"/>
 
 	<!--  pattern: URI pattern, access: 권한 체크 -->
 	<security:intercept-url pattern="/" access="permitAll"/>
-	<security:intercept-url pattern="/common/**" access="permitAll"/>
-	<security:intercept-url pattern="/user/main" access="hasRole('C1001')"/>
-	<security:intercept-url pattern="/manager/main" access="hasRole('C1002')"/>
-	
-	
-	
-	<security:form-login login-page="/common/login" authentication-success-handler-ref="customLoginSuccess"/>
-	
-	<security:logout logout-url="/common/logout" invalidate-session="true" delete-cookies="JSESSION_ID"/>
-		
-	<!-- 아래 인터페이스를 이용하여 에러페이지 이동<security:access-denied-handler error-page="/accessError"/> -->
-	<security:access-denied-handler ref="customAccessDenied"/>
+<!-- 	<security:intercept-url pattern="/common/user" access="hasRole('C1001')"/>
+	<security:intercept-url pattern="/common/manager" access="hasRole('C1002')"/> -->
 	
 </security:http>
 
@@ -37,7 +28,7 @@
 	
 	<security:authentication-provider user-service-ref="customUserDetailsService">
 	
-		<security:password-encoder ref="bcryptPasswordEncoder" /> 
+		<security:password-encoder ref="passwordEncoder" /> 
 		
 	</security:authentication-provider>
 	

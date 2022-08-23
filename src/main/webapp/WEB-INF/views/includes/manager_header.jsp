@@ -37,7 +37,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-               <a href="/"><img src="./resources/img/logo.png" style = "height:230px"></a>
+               <a href="/common/manager"><img src="/resources/img/logo.png" style = "height:230px"></a>
             </div>
 
             <div class="clearfix"></div>
@@ -67,22 +67,32 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                 <ul class="nav side-menu" style="">
-                  <li><a><i class="fa fa-clone"></i>마이페이지 <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">내정보 보기</a></li>
-                      <li><a href="fixed_footer.html">내정보 수정</a></li>
-                      <li><a href="fixed_footer.html">비밀번호 수정</a></li>
-                      <li><a href="fixed_footer.html">탈퇴</a></li>
-                    </ul>
+                  <li>
+                  	<a><i class="fa fa-cutlery"></i>카테고리 <span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="fixed_sidebar.html">한식</a></li>
+	                      <li><a href="fixed_footer.html">일식</a></li>
+	                      <li><a href="fixed_footer.html">양식</a></li>
+	                      <li><a href="fixed_footer.html">중식</a></li>
+	                    </ul>
                   </li>
                   <li>
-                  	<a href="/common/join"><i class="fa fa-heart-o"></i> 매장관리</a>
+                  <a><i class="fa fa-user"></i>마이페이지 <span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="/mypage/list">내정보 보기</a></li>
+	                      <li><a href="/mypage/modify">내정보 수정</a></li>
+	                      <li><a href="/mypage/pwmodify">비밀번호 수정</a></li>
+	                      <li><a href="/mypage/list">탈퇴</a></li>
+	                    </ul>
                   </li>
                   <li>
-                  	<a href="/common/login"><i class="fa fa-smile-o"></i>메뉴관리</a>
+                  	<a href="/manager/stlist"><i class="fa fa-heart-o"></i> 매장관리</a>
                   </li>
                   <li>
-                  	<a href="/common/login"><i class="fa fa-smile-o"></i>예약관리</a>
+                  	<a href="/common/login"><i class="fa fa-cutlery"></i>메뉴관리</a>
+                  </li>
+                  <li>
+                  	<a href="/common/login"><i class="fa fa-calendar-o"></i>예약관리</a>
                   </li>
                 </ul>
               </div>
@@ -94,7 +104,7 @@
             
             <!-- 로그아웃 -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="" href="/common/login" data-original-title="Logout">
+              <a data-toggle="tooltip" data-placement="top" title="" href="/common/logout" data-original-title="Logout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
