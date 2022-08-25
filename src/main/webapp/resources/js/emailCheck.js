@@ -27,7 +27,7 @@ $('#emailck').click(function() {
 		type : 'get',
 		url : "/common/mailCheck?email="+email, // GET방식이라 Url 뒤에 email을 묻힐수있다.
 		success : function (data) {
-		/*console.log("인증번호 : " +  data);*/
+		console.log("인증번호 : " +  data);
 		checkInput.attr('disabled',false);
 		boxWrap.attr("id", "emailNoBox");
 		code = data;

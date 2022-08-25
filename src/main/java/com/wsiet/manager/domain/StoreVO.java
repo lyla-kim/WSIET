@@ -10,6 +10,7 @@ public class StoreVO {
 
 	private String code_id;	//카테고리
 	private int st_num;	//시퀀스, 매장번호
+	private String user_id; //작성자
 	private String st_name;
 	private String st_biznum;
 	private String st_address1;

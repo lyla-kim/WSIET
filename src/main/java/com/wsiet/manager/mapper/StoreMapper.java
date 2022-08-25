@@ -12,7 +12,7 @@ public interface StoreMapper {
 	
 	public int updateStore(StoreVO stvo);
 	
-	public int deleteStroe(int st_num);
+	public int deleteStore(int st_num);
 	
 	public StoreVO selectStoreByNum(int st_num);
 	

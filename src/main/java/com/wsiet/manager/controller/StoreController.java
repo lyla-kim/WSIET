@@ -1,5 +1,10 @@
 package com.wsiet.manager.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,15 +12,20 @@ import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,7 +56,7 @@ public class StoreController {
 		log.info("store list:::");
 		
 		model.addAttribute("stlist", stService.getList());
-	}
+	} 
 	
 	//사업자번호 중복 체크
 	@PostMapping("/bizNumCheck")
@@ -85,14 +95,15 @@ public class StoreController {
 		return "redirect:/manager/stlist";
 	}
 	
-	@GetMapping("/get")
+	@GetMapping("/stget")
 	public void get(@RequestParam("st_num") int st_num, Model model) {
 		log.info("/get");
 		
-		model.addAttribute("model", stService.getStore(st_num));
+		model.addAttribute("store", stService.getStore(st_num));
 		
 	}
 	
+	//상세보기에서 이미지 출력
 	@GetMapping(value="/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<StoreAttachVO>> getAttachList(int st_num){
@@ -106,10 +117,42 @@ public class StoreController {
 	}
 	
 	@GetMapping("/stdelete")
-	public void stdelete() {
+	/* @ResponseBody */
+	/* @PreAuthorize("principal.username == #user_id")  user_id? or store.user_id? */
+	public String stdelete(@RequestParam("st_num") int st_num, RedirectAttributes rttr) {
+		log.info("delete..."+st_num);
+		
+		List<StoreAttachVO> attachList = stService.getAttachList(st_num);
+		
+		if(stService.remove(st_num)) {
+			deleteFiles(attachList);
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+		return "redirect:/manager/stlist";
 	}
 	
+	private void deleteFiles(List<StoreAttachVO> attachList) {
+		if(attachList == null || attachList.size() == 0) {
+			return;
+		}
+		
+		attachList.forEach(attach -> {
+			try {
+				Path file = Paths.get("c:\\wsiet_img\\"+attach.getSt_uuid()+"_"+attach.getSt_filename());
+				Files.deleteIfExists(file);
+				
+				Path thumbNail = Paths.get("c:\\wsiet_img\\"+"s_"+attach.getSt_uuid()+"_"+attach.getSt_filename());
+				Files.delete(thumbNail);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
 	
-	
-	
+	/*
+	 * @DeleteMapping("/stDelete/{st_num}") public void
+	 * delete(@PathVariable("st_num") int st_num) throws Exception{
+	 * log.info("delete st_num:::"+st_num); stService.remove(st_num); }
+	 */
 }

@@ -6,7 +6,10 @@
 
 	<select id="selectAllStore" resultType="com.wsiet.manager.domain.StoreVO">
 		<![CDATA[
-			SELECT * FROM STORE
+			SELECT s.ST_NUM , s.CODE_ID, s.ST_NUM, s.ST_NAME, s.ST_BIZNUM, s.ST_ADDRESS1, s.ST_ADDRESS2 , s.ST_ADDRESS3 ,
+					s.ST_PHONE , s.STARTTIME1 , s.ENDTIME1 , s.ST_CONTENT , s.USER_ID, si.ST_UUID, si.UPLOADPATH, si.FILENAME 
+			FROM STORE s, STORE_IMG si 
+			WHERE s.ST_NUM = si.ST_NUM(+)
 		]]>
 	</select>
 	
@@ -14,9 +17,10 @@
 		<selectKey keyProperty="st_num" order="BEFORE" resultType="int">
 			select SEQ_STORE_ST_NUM.nextval from dual
 		</selectKey>
+		
+		INSERT INTO STORE (CODE_ID, ST_NUM, ST_NAME, ST_BIZNUM, ST_ADDRESS1, ST_PHONE, STARTTIME1, ENDTIME1, ST_CONTENT, ST_REVIEWAVG, REGDATE, UPDDATE, ST_ADDRESS2, ST_ADDRESS3, USER_ID) 
+			VALUES(#{code_id}, #{st_num}, #{st_name}, #{st_biznum}, #{st_address1}, #{st_phone}, #{startTime1}, #{endTime1}, #{st_content}, 0, SYSDATE , SYSDATE , #{st_address2}, #{st_address3}, 'test1')
 	
-		INSERT INTO STORE (ST_NUM, CODE_ID, ST_NAME, ST_BIZNUM, ST_ADDRESS1, ST_ADDRESS2, ST_ADDRESS3, ST_PHONE, STARTTIME1, ENDTIME1, ST_CONTENT, REGDATE, UPDDATE)
-		VALUES(#{st_num}, #{code_id}, #{st_name}, #{st_biznum}, #{st_address1}, #{st_address2}, #{st_address3}, #{st_phone}, #{startTime1}, #{endTime1}, #{st_content}, sysdate, sysdate)
 	</insert>
 	
 	<select id="bizNumCheck" parameterType="String" resultType="integer">
@@ -36,6 +40,6 @@
 	
 	<delete id="deleteStore">
 		DELETE FROM STORE
-		WHERE ST_NUM= #{st_num}; 
+		WHERE ST_NUM= #{st_num}
 	</delete>
 </mapper>

@@ -76,7 +76,7 @@ public class StoreServiceImple implements StoreService {
 		
 		attachMapper.deleteAll(st_num);
 		
-		return stMapper.deleteStroe(st_num) == 1;
+		return stMapper.deleteStore(st_num) == 1;
 	}
 
 	@Override
