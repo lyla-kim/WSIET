@@ -9,7 +9,7 @@
 
 <body>
 	<div class="right_col" role="main" style="min-height: 1170px;">
-		<form class="form-horizontal form-label-left" role="form" name="frm" id="frm" action="/manager/stlist" >
+		<form class="form-horizontal form-label-left" role="form" name="frm" id="frm" method="post" action="/manager/stlist" >
           <div class=""></div>
 		
 
@@ -45,7 +45,7 @@
                             <td class="hidden">${store.user_id}</td>
                             <td class="image">
                             	<div>
-                            		<img <%-- width="10%" src="/img/${store.st_uuid}_${store.filename}"  --%>/>
+                            		<img>
                             	</div>
                             </td> 
                             <td class=" ">${store.st_biznum }</td>
@@ -132,6 +132,9 @@
 </div>
 </body>
 
+    <!-- jQuery -->
+    <script src="/resources/vendors/jquery/dist/jquery.min.js"></script>
+    
 <script>
 $(document).ready(function(){
 	

@@ -9,7 +9,7 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO STORE_IMG (ST_NUM, ST_UUID, UPLOADPATH, FILENAME)
+		INSERT INTO STORE_IMG (ST_NUM, ST_UUID, ST_UPLOADPATH, ST_FILENAME)
 		VALUES(#{st_num}, #{st_uuid}, #{st_uploadpath}, #{st_filename})
 	</insert>
 	

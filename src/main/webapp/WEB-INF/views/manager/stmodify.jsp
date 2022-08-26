@@ -22,28 +22,33 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><b>매장 상세 정보</b></h2>
+                    <h2><b>매장 정보 수정</b></h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br>
-                    <form class="form-horizontal form-label-left" role="form" method="post" name="frm" id="frm">
-
+                    <form class="form-horizontal form-label-left" role="form" method="post" name="frm" id="frm" action="/manager/stmodify" >
+					  
+					   <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">매장 사진</label>
+	                        <div class="col-md-6 col-sm-6 col-xs-12">
+	                        </div>
+					  		<!-- 기존사진 출력 -->
+	                       <div class='storeResult'>
+	                       	 <ul>
+	                       	 
+	                       	 </ul>
+	                       </div>
+	                     </div>	
 					  <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">카테고리</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        	<c:if test="${store.code_id eq 'A1001' }">
-							<input name="st_code_id" id="st_code_id" class="form-control col-md-7 col-xs-12" data-parsley-id="5" readonly value="한식">
-                        	</c:if>
-                        	<c:if test="${store.code_id eq 'A1002' }">
-							<input name="st_code_id" id="st_code_id" class="form-control col-md-7 col-xs-12" data-parsley-id="5" readonly value="일식">
-                        	</c:if>
-                        	<c:if test="${store.code_id eq 'A1003' }">
-							<input name="st_code_id" id="st_code_id" class="form-control col-md-7 col-xs-12" data-parsley-id="5" readonly value="양식">
-                        	</c:if>
-                        	<c:if test="${store.code_id eq 'A1004' }">
-							<input name="st_code_id" id="st_code_id" class="form-control col-md-7 col-xs-12" data-parsley-id="5" readonly value="중식">
-                        	</c:if>
+                        	<select class="form-control" name="code_id" id="code_id">
+	                            <option value="A1001">한식</option>
+	                            <option value="A1002">일식</option>
+	                            <option value="A1003">양식</option>
+	                            <option value="A1004">중식</option>
+                          	</select>
                         </div>
                       </div>
                       
@@ -57,7 +62,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">매장명</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-							<input name="st_name" id="st_name" class="form-control col-md-7 col-xs-12" data-parsley-id="5" readonly value="${store.st_name }">
+							<input name="st_name" id="st_name" class="form-control col-md-7 col-xs-12" data-parsley-id="5" value="${store.st_name }">
                         </div>
                       </div>
                       
@@ -66,6 +71,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="st_address1" name="st_address1" readonly class="form-control col-md-7 col-xs-12" data-parsley-id="9" value="${store.st_address1 }">
                         </div>
+                          <button type="button" onclick="execPostCode();" >주소찾기</button>
                       </div>
                       
                       <div class="form-group">
@@ -78,21 +84,21 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
                       	<div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="st_address3" name="st_address3" class="form-control col-md-7 col-xs-12" data-parsley-id="9" readonly value="${store.st_address3 }">
+                          <input id="st_address3" name="st_address3" class="form-control col-md-7 col-xs-12" data-parsley-id="9" required value="${store.st_address3 }">
                         </div>
                       </div>
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">연락처</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="st_phone" name="st_phone" class="form-control col-md-7 col-xs-12" data-parsley-id="9" readonly value="${store.st_phone }">
+                          <input id="st_phone" name="st_phone" class="form-control col-md-7 col-xs-12" data-parsley-id="9" required value="${store.st_phone }">
                         </div>
                       </div>
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">운영시간</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type=time name="startTime1" readonly value="${store.startTime1 }"> &nbsp;&nbsp; ~ &nbsp;&nbsp; <input type=time name="endTime1" readonly value="${store.endTime1 }">
+                          <input type=time name="startTime1" required value="${store.startTime1 }"> &nbsp;&nbsp; ~ &nbsp;&nbsp; <input type=time name="endTime1" required value="${store.endTime1 }">
                         </div>
                       </div>
                       
@@ -100,19 +106,18 @@
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">매장 소개</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="textarea" name="st_content" class="form-control col-md-7 col-xs-12" readonly value="${store.st_content }">
+                          <input id="textarea" name="st_content" class="form-control col-md-7 col-xs-12" required value="${store.st_content }">
                         </div>
                       </div>
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">매장 사진</label>
-                        <br>
 	                        <div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="file" name="uploadFile" multiple>
 	                        </div>
-	                       <div class='storeResult'>
-	                       <br>
+	                       <div class='uploadResult'>
 	                       	 <ul>
-	                       	 
+	                      		
 	                       	 </ul>
 	                       </div>
                       </div>
@@ -120,7 +125,9 @@
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         	<div style='width:80px;float: right;'>
-	                   			<button data-oper='list' class="btn btn-success">목록</button>
+	                   			<button data-oper='list' class="btn btn-primary">목록</button>
+	                   			<button type=submit data-oper='modify' class="btn btn-success">수정</button>
+	                   			<input type="hidden" id="st_num" name="st_num" value="${store.st_num }">
 					   		</div>
                         </div>
                       </div>
@@ -133,8 +140,12 @@
         </div>
         <!-- /page content -->
         
-            <!-- jQuery -->
-    <script src="/resources/vendors/jquery/dist/jquery.min.js"></script>
+<!-- jQuery -->
+<script src="/resources/vendors/jquery/dist/jquery.min.js"></script>
+
+<!-- 주소찾기 kakao api -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="/resources/js/st_addressApi.js"></script>
 	
 <script type="text/javascript">
 
@@ -174,6 +185,125 @@ $(document).ready(function(){
 	
 });
 
+</script>
+
+<script>
+$(document).ready(function(){
+	var formObj = $("form[role='form']");
+	
+	$("button[type='submit'").on("click", function(e){
+		e.preventDefault();
+		console.log("수정 clicked");
+		
+		var str = "";
+		
+		$(".uploadResult ul li").each(function(i, obj){
+			var jobj = $(obj);
+			
+			console.dir(jobj);
+			
+			console.log(jobj.data("filename"));
+			console.log(jobj.data("uuid"));
+			console.log(jobj.data("path"));
+			
+			str += "<input type='hidden' name='attachList["+i+"].st_filename' value='"+jobj.data("filename")+"'>";
+			str += "<input type='hidden' name='attachList["+i+"].st_uuid' value='"+jobj.data("uuid")+"'>";
+			str += "<input type='hidden' name='attachList["+i+"].st_uploadpath' value='"+jobj.data("path")+"'>";
+		});
+		
+		formObj.append(str).submit();
+	});
+	
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	var maxSize = 5242880; //5MB
+	
+	function checkExtendsion(fileName, fileSize){
+		if(fileSize >= maxSize){
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		
+		if(regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	$("input[type='file']").change(function(e){
+		var formData = new FormData();
+		var inputFile = $("input[name='uploadFile']");
+		var files = inputFile[0].files;
+		
+		
+		for(var i=0; i<files.length; i++){
+			if(!checkExtendsion(files[i].name, files[i].size)){
+				return false;
+			}
+			
+			formData.append("uploadFile", files[i]);
+		}
+		
+		$.ajax({
+			url: '/uploadAjaxAction',
+			processData: false,
+			contentType: false,
+			data: formData,
+			type:'POST',
+			dataType: 'json',
+			success: function(result){
+				console.log(result);
+				showUploadFile(result);
+			}
+		});
+		
+	});
+	
+	function showUploadFile(uploadResultArr){
+		if(!uploadResultArr || uploadResultArr.length ==0)
+		{
+			return;	
+		}
+		
+		var uploadURL = $(".uploadResult ul");
+		var str = "";
+		
+		$(uploadResultArr).each(function(i, obj){
+				var fileCallPath =  encodeURIComponent("/s_"+obj.st_uuid +"_"+obj.st_filename);
+				str += "<li data-path='"+obj.st_uploadpath+"'";
+				str +=" data-uuid='"+obj.st_uuid+"' data-filename='"+obj.st_filename+"' data-type='"+obj.image+"'";
+				str +=" ><div>";
+				str += "<span> "+ obj.st_filename+"</span>";
+				str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+				str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+				str += "<img src='/display?fileName="+fileCallPath+"'>";
+				str += "</div>";
+				str +"</li>";
+						
+		});
+		
+		uploadURL.append(str);
+	}
+	
+	$(".uploadResult").on("click", "button", function(e){
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
+		
+		var targetLi = $(this).closest("li");
+		
+		$.ajax({
+			url: '/deleteFile',
+			data: {fileName: targetFile, type:type},
+			dataType:'text',
+			type:'POST',
+			success: function(result){
+				alert(result);
+				targetLi.remove();
+			}
+		});
+	});
+});
 </script>
 
   

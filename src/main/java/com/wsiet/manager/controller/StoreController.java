@@ -21,14 +21,17 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -113,7 +116,29 @@ public class StoreController {
 	}
 	
 	@GetMapping("/stmodify")
-	public void stmodify() {
+	public void stmodify(@RequestParam("st_num") int su_num, Model model) {
+		log.info("/modify 화면 이동");
+		
+		model.addAttribute("store", stService.getStore(su_num));
+	}
+	
+	@PostMapping("/stmodify")
+	public String stmodify(StoreVO vo, RedirectAttributes rttr) {
+		log.info("modify::"+vo);
+		
+		if(vo.getAttachList() != null) {
+			List<StoreAttachVO> attachList = stService.getAttachList(vo.getSt_num());
+			deleteFiles(attachList);
+			vo.getAttachList().forEach(attach -> log.info(attach));
+		}
+		
+		boolean result = stService.modify(vo);
+		
+		if(result) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+		return "redirect:/manager/stlist";
 	}
 	
 	@GetMapping("/stdelete")

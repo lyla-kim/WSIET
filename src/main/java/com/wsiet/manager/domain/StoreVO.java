@@ -18,9 +18,7 @@ public class StoreVO {
 	private String st_address3;
 	private String st_phone;
 	private String startTime1;
-	private String startTime2;
 	private String endTime1;
-	private String endTime2;
 	private String st_content;
 	private int st_reviewAvg;
 	private Date regdate;

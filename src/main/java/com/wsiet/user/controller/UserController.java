@@ -29,7 +29,7 @@ import lombok.extern.log4j.Log4j;
 public class UserController {
 
 	
-	@RequestMapping("/main_page")
+	@RequestMapping("/main")
 	public String mainGET() {
 		log.info("user main 화면");
 		return "/user/main";//이건 jsp 경로

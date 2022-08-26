@@ -29,20 +29,20 @@ import lombok.extern.log4j.Log4j;
 public class ReservController {
 
 	
-	@GetMapping("/mnlist")
-	public void stlist() {
+	@GetMapping("/reservlist")
+	public void relist() {
 	}
 	
-	@GetMapping("/mnregister")
-	public void stregister() {
+	@GetMapping("/reservregister")
+	public void reregister() {
 	}
 	
-	@GetMapping("/mnmodify")
-	public void stmodify() {
+	@GetMapping("/reservmodify")
+	public void remodify() {
 	}
 	
-	@GetMapping("/mndelete")
-	public void stdelete() {
+	@GetMapping("/reservdelete")
+	public void redelete() {
 	}
 	
 	

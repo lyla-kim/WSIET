@@ -6,10 +6,8 @@
 
 	<select id="selectAllStore" resultType="com.wsiet.manager.domain.StoreVO">
 		<![CDATA[
-			SELECT s.ST_NUM , s.CODE_ID, s.ST_NUM, s.ST_NAME, s.ST_BIZNUM, s.ST_ADDRESS1, s.ST_ADDRESS2 , s.ST_ADDRESS3 ,
-					s.ST_PHONE , s.STARTTIME1 , s.ENDTIME1 , s.ST_CONTENT , s.USER_ID, si.ST_UUID, si.UPLOADPATH, si.FILENAME 
-			FROM STORE s, STORE_IMG si 
-			WHERE s.ST_NUM = si.ST_NUM(+)
+			SELECT *
+			FROM STORE
 		]]>
 	</select>
 	
@@ -34,8 +32,8 @@
 	
 	<update id="updateStore">
 		UPDATE STORE 
-			SET CODE_ID=#{code_id}, ST_NAME=#{st_name}, ST_ADDRESS1=#{st_address1}, ST_PHONE=#{st_phone}, STARTTIME1=#{startTime1}, ENDTIME1=#{endTime1}, ST_CONTENT=#{st_content}, UPDDATE=SYSDATE , ST_ADDRESS2=#{st_address2}, ST_ADDRESS3=#{st_address3}
-		WHERE ST_NUM= #{st_num};
+		SET CODE_ID=#{code_id}, ST_NAME=#{st_name}, ST_ADDRESS1=#{st_address1}, ST_PHONE=#{st_phone}, STARTTIME1=#{startTime1}, ENDTIME1=#{endTime1}, ST_CONTENT=#{st_content}, UPDDATE=SYSDATE, ST_ADDRESS2=#{st_address2}, ST_ADDRESS3=#{st_address3}, USER_ID='test1' 
+		WHERE ST_NUM=#{st_num}
 	</update>
 	
 	<delete id="deleteStore">
