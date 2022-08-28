@@ -24,6 +24,11 @@ public class StoreVO {
 	private Date regdate;
 	private Date upddate;
 	
+	private String st_uuid;
+	private String st_uploadpath;
+	private String st_filename;
+	private String st_file_url;
+	
 	private List<StoreAttachVO> attachList;
 	
 	

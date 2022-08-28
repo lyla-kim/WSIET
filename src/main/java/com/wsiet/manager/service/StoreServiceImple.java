@@ -91,4 +91,5 @@ public class StoreServiceImple implements StoreService {
 		return stMapper.bizNumCheck(bizNum);
 	}
 
+
 }

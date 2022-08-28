@@ -9,7 +9,7 @@
 
 <body>
 	<div class="right_col" role="main" style="min-height: 1170px;">
-		<form class="form-horizontal form-label-left" role="form" name="frm" id="frm" method="post" action="/manager/stlist" >
+<!-- 		<form class="form-horizontal form-label-left" role="form" name="frm" id="frm" method="post" action="/manager/stlist" > -->
           <div class=""></div>
 		
 
@@ -40,12 +40,12 @@
 
                         <tbody>
                         <c:forEach var="store" items="${stlist }">
-                          <tr class="even pointer">
+                          <tr class="even pointer" id="tr_${store.st_num}">
                             <td class="hidden">${store.st_num}</td>
                             <td class="hidden">${store.user_id}</td>
                             <td class="image">
                             	<div>
-                            		<img>
+                            		<img src="${store.st_file_url }" style="width:50px">
                             	</div>
                             </td> 
                             <td class=" ">${store.st_biznum }</td>
@@ -53,9 +53,9 @@
                             <td class=" last">
                             	<div>
                             		<!-- ajax 활용 -->
-                            		<button name="detail" value="${store.st_num }" class="btn btn-primary">상세</button>
-                            		<button name="modofy" value="${store.st_num }" class="btn btn-success">수정</button>
-                            		<button name="delete" value="${store.st_num }" class="btn btn-danger">삭제</button>
+                            		<button name="detail_${store.st_num }" value="${store.st_num }" class="btn btn-primary">상세</button>
+                            		<button name="modofy_${store.st_num }" value="${store.st_num }" class="btn btn-success">수정</button>
+                            		<button name="delete_${store.st_num }" id="btnDel_${store.st_num }" value="${store.st_num }" class="btn btn-danger btnDel">삭제</button>
                             	</div>
                             </td>
                             <td class=" last"><a href='/manager/stget?st_num=<c:out value="${store.st_num }"/>'>상세</a></td>
@@ -70,7 +70,7 @@
                   </div>
                 </div> 
               </div>
-              </form>
+<!--               </form> -->
             </div>
             
             
@@ -89,7 +89,7 @@
 						<td>사진</td>
 						<td>
 							<div>
-								<img>
+								<img src=""/>
 							</div>
 						</td>
 					</tr>
@@ -139,16 +139,30 @@
 $(document).ready(function(){
 	
 	//삭제버튼 클릭 시
-	$("button[name='delete']").click(function(){
-		st_num = this.value;
+	$(".btnDel").click(function(){
+		if(!confirm("삭제하시겠습니까?")){
+			return;
+		}
+		var st_num = this.value;
 		$.ajax({
-			url : '/manager/stdelete' + st_num,
-			type : 'DELETE',
+			type : 'GET',
+			url : '/manager/stdelete',
+			data : 'st_num=' + st_num,
+			datatype : 'JSON',
+			success:function(response){
+				$("#tr_" + st_num).remove();
+				//location.reload();
+			},
+			complete:function(data){
+				alert("삭제되었습니다.");
+			},
+			error:function(xhr, status, error){
+				alert(error);
+			}
 		});
-		location.reload();
 	});
 
-
+	
 /*   function stDelete(st_num){
 	if (confirm("정말 삭제하시겠습니까 ?")) {
 		st_num = this.value;
@@ -171,5 +185,6 @@ $(document).ready(function(){
 
 
 });
+
 </script>
 </html>

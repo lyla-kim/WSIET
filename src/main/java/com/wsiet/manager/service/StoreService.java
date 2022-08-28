@@ -21,4 +21,5 @@ public interface StoreService {
 	
 	//사업자번호 중복체크
 	public int bizNumCheck(String bizNum);
+	
 }

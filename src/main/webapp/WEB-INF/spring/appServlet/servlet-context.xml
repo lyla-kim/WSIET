@@ -26,4 +26,9 @@
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean>
 	
+	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+	    <beans:property name="contentType" value="application/json;charset=UTF-8"/>
+	</beans:bean>
+
+	
 </beans:beans>

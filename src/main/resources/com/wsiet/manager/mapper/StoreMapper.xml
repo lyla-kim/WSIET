@@ -6,8 +6,25 @@
 
 	<select id="selectAllStore" resultType="com.wsiet.manager.domain.StoreVO">
 		<![CDATA[
-			SELECT *
-			FROM STORE
+			SELECT 
+				A.CODE_ID
+				,A.ST_NUM
+				,A.ST_NAME
+				,A.ST_BIZNUM
+				,A.ST_ADDRESS1
+				,A.ST_PHONE
+				,A.STARTTIME1
+				,A.ENDTIME1
+				,A.ST_CONTENT
+				,A.ST_REVIEWAVG
+				,A.REGDATE
+				,A.UPDDATE
+				,A.ST_ADDRESS2
+				,A.ST_ADDRESS3
+				,A.USER_ID
+				,(SELECT '/display?fileName=%2F'||ST_UUID||'_'||ST_FILENAME FROM STORE_IMG WHERE ST_NUM = A.ST_NUM AND ROWNUM = 1) AS ST_FILE_URL
+			FROM STORE A 
+			ORDER BY ST_NUM DESC
 		]]>
 	</select>
 	
@@ -27,6 +44,12 @@
 	
 	<select id="selectStoreByNum" resultType="com.wsiet.manager.domain.StoreVO">
 		SELECT * FROM STORE
+		WHERE ST_NUM = #{st_num}
+	</select>
+	
+	<select id="selectAddress" resultType="com.wsiet.manager.domain.StoreVO">
+		SELECT ST_ADDRESS1, ST_ADDRESS2, ST_ADDRESS3 
+		FROM STORE
 		WHERE ST_NUM = #{st_num}
 	</select>
 	
